@@ -1,5 +1,5 @@
 import 'package:doctor/core/theming/styles.dart';
-import 'package:doctor/features/onboarding/widgets/button.dart';
+import 'package:doctor/core/widgets/button.dart';
 import 'package:doctor/features/onboarding/widgets/doctor_logo_opacity.dart';
 import 'package:doctor/features/onboarding/widgets/logo_name.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,12 +28,12 @@ class OnboardingScreen extends StatelessWidget {
                   padding: EdgeInsets.only(left: 40.h,right: 20.h),
                   child: Text(
                     'Manage and schedule all of your medical appointments easily with Docdoc to get a new experience.',
-                    style: TextStyles.font12grey400weight,
+                    style: TextStyles.font14grey400weight,
                     textAlign: TextAlign.center,
                   ),
                 ),
                 SizedBox(height: 30.h,),
-                Button()
+                AppButton('Get Started')
               ],
             ),
           ),
