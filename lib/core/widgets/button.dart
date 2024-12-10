@@ -3,25 +3,27 @@ import 'package:doctor/core/routing/routers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/theming/colors.dart';
-import '../../../core/theming/styles.dart';
+import '../theming/colors.dart';
+import '../theming/styles.dart';
 
-class Button extends StatelessWidget {
-  const Button({super.key});
+class AppButton extends StatelessWidget {
+
+  String? text;
+  AppButton(this.text,{super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       color: AppColors.primaryColor,
       height: 52.h,
-      minWidth: 311.w,
+      minWidth: 327.w,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16)
       ),
       onPressed: () {
         context.pushNamed(Routers.login);
       },
-      child: Text('Get Started',style: TextStyles.font16white600weight,),
+      child: Text(text!,style: TextStyles.font16white600weight,),
     );
   }
 }
