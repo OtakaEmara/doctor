@@ -1,7 +1,8 @@
 import 'package:doctor/core/routing/routers.dart';
-import 'package:doctor/features/login/login_screen.dart';
 import 'package:doctor/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../features/login/ui/login_screen.dart';
 
 class AppRouting{
 

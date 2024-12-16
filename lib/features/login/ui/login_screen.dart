@@ -3,9 +3,9 @@ import 'package:doctor/core/theming/colors.dart';
 import 'package:doctor/core/theming/styles.dart';
 import 'package:doctor/core/widgets/button.dart';
 import 'package:doctor/core/widgets/text_form_field.dart';
-import 'package:doctor/features/login/widgets/already_sign_up.dart';
-import 'package:doctor/features/login/widgets/remember_and_forget_password.dart';
-import 'package:doctor/features/login/widgets/terms_and_polices.dart';
+import 'package:doctor/features/login/ui/widgets/already_sign_up.dart';
+import 'package:doctor/features/login/ui/widgets/remember_and_forget_password.dart';
+import 'package:doctor/features/login/ui/widgets/terms_and_polices.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
