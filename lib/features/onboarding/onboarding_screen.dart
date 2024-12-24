@@ -1,3 +1,5 @@
+import 'package:doctor/core/helpers/extension.dart';
+import 'package:doctor/core/routing/routers.dart';
 import 'package:doctor/core/theming/styles.dart';
 import 'package:doctor/core/widgets/button.dart';
 import 'package:doctor/features/onboarding/widgets/doctor_logo_opacity.dart';
@@ -33,7 +35,12 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30.h,),
-                AppButton('Get Started')
+                AppButton(
+                    'Get Started',
+                    onPressed: () {
+                      context.pushNamed(Routers.login);
+                    },
+                )
               ],
             ),
           ),

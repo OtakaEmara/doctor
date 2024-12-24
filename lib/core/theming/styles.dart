@@ -59,9 +59,21 @@ class TextStyles{
     fontWeight: FontWeight.w400,
   );
 
+  static TextStyle font14blue400weight = TextStyle(
+    fontSize: 14.sp,
+    color: AppColors.primaryColor,
+    fontWeight: FontWeight.w400,
+  );
+
   static TextStyle font15LightGrey500weight = TextStyle(
     fontSize: 15.sp,
     color: AppColors.lightGrey,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle font15DarkBlue500weight = TextStyle(
+    fontSize: 15.sp,
+    color: AppColors.darkBlue,
     fontWeight: FontWeight.w500,
   );
 

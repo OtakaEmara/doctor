@@ -1,12 +1,20 @@
 import 'package:doctor/features/login/data/models/login_request.dart';
 import 'package:doctor/features/login/logic/cubit/login_states.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/repo/login_repo.dart';
 
 class LoginCubit extends Cubit<LoginStates>{
   final LoginRepo _loginRepo;
   LoginCubit(this._loginRepo) : super(const LoginStates.loginInitial());
+
+  var formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   void emitLoginStates(LoginRequest loginRequest) async{
     emit(const LoginStates.loginLoading());

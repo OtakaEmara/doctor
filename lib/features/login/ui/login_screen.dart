@@ -3,11 +3,17 @@ import 'package:doctor/core/theming/colors.dart';
 import 'package:doctor/core/theming/styles.dart';
 import 'package:doctor/core/widgets/button.dart';
 import 'package:doctor/core/widgets/text_form_field.dart';
+import 'package:doctor/features/login/logic/cubit/login_cubit.dart';
 import 'package:doctor/features/login/ui/widgets/already_sign_up.dart';
+import 'package:doctor/features/login/ui/widgets/email_and_password.dart';
+import 'package:doctor/features/login/ui/widgets/login_bloc_listener.dart';
 import 'package:doctor/features/login/ui/widgets/remember_and_forget_password.dart';
 import 'package:doctor/features/login/ui/widgets/terms_and_polices.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../data/models/login_request.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -16,13 +22,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var formKey = GlobalKey<FormState>();
-  bool focused = false;
-  bool secureText = true;
-  bool checkBox = false;
 
   @override
   Widget build(BuildContext context) {
+    var loginCubit = context.read<LoginCubit>();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -37,62 +40,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 1.8.h
                 ),),
                 vertical(40),
-                Form(
-                    key: formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AppTextFormField('Email',
-                          onTap: (){
-                            setState(() {
-                              focused = false;
-                            });
-                          },
-                        ),
-                        vertical(20),
-                        AppTextFormField(
-                          'Password',
-                          onTap: (){
-                            setState(() {
-                              focused = true;
-                            });
-                          },
-                          obscureText: secureText,
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                secureText = !secureText;
-                              });
-                            },
-                            icon: secureText ? Icon(Icons.visibility_off_outlined,
-                              color: focused ? AppColors.grey : AppColors.lightGrey,
-                              size: 23.sp,) :
-                            Icon(Icons.visibility_outlined,
-                                color: focused ? AppColors.grey : AppColors.lightGrey,
-                                size: 23.sp),
-                          ),
-                        ),
-                        vertical(20),
-                        RememberAndForgetPassword(
-                          value: checkBox,
-                          onChanged: (p0) {
-                            setState(() {
-                              checkBox = !checkBox;
-                            });
-                          },
-                        )
-                      ],
-                    ),
-                ),
+                EmailAndPassword(),
                 vertical(30),
-                AppButton('Login'),
+                AppButton(
+                  'Login',
+                  onPressed: () {
+                    if(loginCubit.formKey.currentState!.validate()){
+                      loginCubit.emitLoginStates(
+                          LoginRequest(
+                              email: loginCubit.emailController.text,
+                              password: loginCubit.passwordController.text
+                          )
+                      );
+                    }
+                  },
+                ),
                 vertical(40),
                 Padding(
                   padding: EdgeInsets.only(left: 12.0.w),
                   child: TermsAndPolices(),
                 ),
                 vertical(30),
-                Center(child: AlreadySignUp())
+                Center(child: AlreadySignUp()),
+                LoginBlocListener()
               ],
             ),
           ),
