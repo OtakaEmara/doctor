@@ -8,8 +8,9 @@ import '../theming/styles.dart';
 
 class AppButton extends StatelessWidget {
 
-  String? text;
-  AppButton(this.text,{super.key});
+  final String? text;
+  final Function()? onPressed;
+  AppButton(this.text,{super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,7 @@ class AppButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16)
       ),
-      onPressed: () {
-        context.pushNamed(Routers.login);
-      },
+      onPressed: onPressed,
       child: Text(text!,style: TextStyles.font16white600weight,),
     );
   }
