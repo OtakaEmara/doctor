@@ -9,6 +9,7 @@ class AppTextFormField extends StatelessWidget {
   TextEditingController? controller;
   Function()? onTap;
   String? Function(String?)? validator;
+  TextInputType? keyboardType;
   bool? obscureText;
   EdgeInsets? contentPadding;
   InputBorder? outlinedBorderEnabledBorder;
@@ -21,7 +22,7 @@ class AppTextFormField extends StatelessWidget {
   Widget? suffixIcon;
 
   AppTextFormField(this.hintText,{super.key,required this.controller,required this.validator,
-    this.onTap,this.obscureText,this.contentPadding,this.outlinedBorderEnabledBorder,
+    this.keyboardType,this.onTap,this.obscureText,this.contentPadding,this.outlinedBorderEnabledBorder,
     this.outlinedBorderFocusedBorder, this.hintTextStyle,this.backgroundColor,this.suffixIcon
   });
 
@@ -31,6 +32,7 @@ class AppTextFormField extends StatelessWidget {
        controller: controller,
        onTap: onTap,
        validator: validator,
+       keyboardType: keyboardType??TextInputType.text,
        obscureText: obscureText ?? false,
        decoration: InputDecoration(
          isDense: true,
@@ -45,7 +47,7 @@ class AppTextFormField extends StatelessWidget {
          focusedBorder: outlinedBorderErrorBorder ?? OutlineInputBorder(
              borderRadius: BorderRadius.circular(16.h),
              borderSide: const BorderSide(
-                 color: Colors.red,
+                 color: AppColors.primaryColor,
                  width: 1
              )
          ),
@@ -56,10 +58,10 @@ class AppTextFormField extends StatelessWidget {
                  width: 1
              )
          ),
-         focusedErrorBorder: outlinedBorderFocusedBorder ?? OutlineInputBorder(
+         focusedErrorBorder: outlinedBorderFocusedErrorBorder ?? OutlineInputBorder(
              borderRadius: BorderRadius.circular(16.h),
              borderSide: const BorderSide(
-                 color: AppColors.primaryColor,
+                 color: Colors.red,
                  width: 1
              )
          ),

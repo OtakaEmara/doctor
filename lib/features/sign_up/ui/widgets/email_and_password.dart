@@ -1,7 +1,6 @@
 import 'package:doctor/core/helpers/app_regex.dart';
-import 'package:doctor/features/login/logic/cubit/login_cubit.dart';
-import 'package:doctor/features/login/ui/widgets/remember_and_forget_password.dart';
 import 'package:doctor/features/login/ui/widgets/setup_password.dart';
+import 'package:doctor/features/sign_up/logic/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +19,8 @@ class EmailAndPassword extends StatefulWidget {
 class _EmailAndPasswordState extends State<EmailAndPassword> {
 
   bool focused = false;
-  bool secureText = true;
+  bool secureTextPassword = true;
+  bool secureTextConfirmPassword = true;
   bool checkBox = false;
   bool hasLowercase = false;
   bool hasUppercase = false;
@@ -30,10 +30,11 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
   TextEditingController passwordController = TextEditingController();
 
+
   @override
   void initState() {
     super.initState();
-    passwordController = context.read<LoginCubit>().passwordController;
+    passwordController = context.read<SignUpCubit>().passwordController;
     passwordController.addListener(() {
       setState(() {
         hasLowercase = AppRegex.hasLowerCase(passwordController.text);
@@ -54,15 +55,31 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
   @override
   Widget build(BuildContext context) {
-    var loginCubit = context.read<LoginCubit>();
+    var signCubit = context.read<SignUpCubit>();
     return Form(
-      key: loginCubit.formKey,
+      key: signCubit.formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppTextFormField(
+            'Name',
+            controller: signCubit.nameController,
+            validator: (p0) {
+              if(p0 == null || p0.isEmpty){
+                return 'Please enter a valid Name';
+              }
+              return null;
+            },
+            onTap: (){
+              setState(() {
+                focused = false;
+              });
+            },
+          ),
+          vertical(15),
+          AppTextFormField(
             'Email',
-            controller: loginCubit.emailController,
+            controller: signCubit.emailController,
             validator: (p0) {
               if(p0 == null || p0.isEmpty || !AppRegex.isEmailValid(p0)){
                 return 'Please enter a valid email';
@@ -75,7 +92,24 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               });
             },
           ),
-          vertical(20),
+          vertical(15),
+          AppTextFormField(
+            'Phone',
+            controller: signCubit.phoneController,
+            validator: (p0) {
+              if(p0 == null || p0.isEmpty || !AppRegex.isPhoneNumberValid(p0)){
+                return 'Please enter a valid phone';
+              }
+              return null;
+            },
+            keyboardType: TextInputType.phone,
+            onTap: (){
+              setState(() {
+                focused = false;
+              });
+            },
+          ),
+          vertical(15),
           AppTextFormField(
             'Password',
             controller: passwordController,
@@ -90,14 +124,14 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 focused = true;
               });
             },
-            obscureText: secureText,
+            obscureText: secureTextPassword,
             suffixIcon: IconButton(
               onPressed: () {
                 setState(() {
-                  secureText = !secureText;
+                  secureTextPassword = !secureTextPassword;
                 });
               },
-              icon: secureText ? Icon(Icons.visibility_off_outlined,
+              icon: secureTextPassword ? Icon(Icons.visibility_off_outlined,
                 color: focused ? AppColors.grey : AppColors.lightGrey,
                 size: 23.sp,) :
               Icon(Icons.visibility_outlined,
@@ -105,16 +139,37 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                   size: 23.sp),
             ),
           ),
-          vertical(20),
-          RememberAndForgetPassword(
-            value: checkBox,
-            onChanged: (p0) {
+          vertical(15),
+          AppTextFormField(
+            'Confirm Password',
+            controller: signCubit.confirmPasswordController,
+            validator: (p0) {
+              if(p0 == null || p0.isEmpty || !AppRegex.isPasswordValid(p0) || p0 != passwordController.text){
+                return 'Please enter a valid password';
+              }
+              return null;
+            },
+            onTap: (){
               setState(() {
-                checkBox = !checkBox;
+                focused = true;
               });
             },
+            obscureText: secureTextConfirmPassword,
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  secureTextConfirmPassword = !secureTextConfirmPassword;
+                });
+              },
+              icon: secureTextConfirmPassword ? Icon(Icons.visibility_off_outlined,
+                color: focused ? AppColors.grey : AppColors.lightGrey,
+                size: 23.sp,) :
+              Icon(Icons.visibility_outlined,
+                  color: focused ? AppColors.grey : AppColors.lightGrey,
+                  size: 23.sp),
+            ),
           ),
-          vertical(20),
+          vertical(15),
           SetupPassword(
             hasLowercase: hasLowercase,
             hasMinLength: hasMinLength,
