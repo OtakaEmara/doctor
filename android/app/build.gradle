@@ -55,6 +55,15 @@ android {
         }
     }
 
+    configurations.all {
+        resolutionStrategy {
+            force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'  // Use the desired Kotlin version here
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22'
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22'
+        }
+    }
+
+
     flavorDimensions += "default"
 
     productFlavors {
@@ -65,7 +74,6 @@ android {
         development {
             dimension = "default"
             resValue "string", "app_name", "Doctor development"
-            applicationIdSuffix = ".dev"
         }
     }
 }
