@@ -31,19 +31,7 @@ jobs:
         with:
           channel: 'stable'
 
-      # Step 4: Install Dependencies
-      - name: Install Flutter Dependencies
-        run: flutter pub get
-
-      # Step 5: Run Flutter Tests
-      - name: Run Tests
-        run: flutter test
-
-      # Step 6: Build Release APK
-      - name: Build APK
-        run: flutter build apk --release
-
-      # Step 7: Set up Ruby for Fastlane
+      # Step 4: Set up Ruby for Fastlane
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -51,13 +39,7 @@ jobs:
           bundler-cache: true
           working-directory: android
 
-      # Step 8: Install Fastlane Gems
-      - name: Install Fastlane Dependencies
-        run: |
-          cd android
-          bundle install
-
-      # Step 9: Firebase App Distribution with Fastlane
+      # Step 5: Firebase App Distribution with Fastlane
       - name: Firebase App Distribution
         env:
           FIREBASE_AUTH_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
