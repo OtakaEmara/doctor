@@ -45,4 +45,4 @@ jobs:
           FIREBASE_AUTH_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
         run: |
           cd android
-          fastlane firebase
+          bundle exec fastlane android firebase_distribution
