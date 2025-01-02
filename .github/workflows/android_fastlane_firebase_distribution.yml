@@ -44,5 +44,5 @@ jobs:
         env:
           FIREBASE_AUTH_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
         run: |
-          cd android
           bundle exec fastlane android firebase_distribution
+        working-directory: android
