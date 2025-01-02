@@ -42,7 +42,7 @@ jobs:
       # Step 5: Firebase App Distribution with Fastlane
       - name: Firebase App Distribution
         env:
-          FIREBASE_AUTH_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
+          FIREBASE_CLI: ${{ secrets.FIREBASE_CLI }}
         run: |
           bundle exec fastlane android firebase_distribution
         working-directory: android
