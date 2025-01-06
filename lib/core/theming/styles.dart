@@ -82,4 +82,16 @@ class TextStyles{
     color: Colors.white,
     fontWeight: FontWeight.w600,
   );
+
+  static TextStyle font18white500weight = TextStyle(
+    fontSize: 18.sp,
+    color: Colors.white,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle font18darkBlue700weight = TextStyle(
+    fontSize: 18.sp,
+    color: AppColors.darkBlue,
+    fontWeight: FontWeight.w600,
+  );
 }
