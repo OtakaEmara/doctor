@@ -9,5 +9,7 @@ class AppColors{
   static const Color moreLighterGrey = Color(0xFFFDFDFF);
   static const Color smoothLightGrey = Color(0xFF9E9E9E);
   static const Color moreSmoothLightGrey = Color(0xFFF5F5F5);
+  static const Color moreSmootherLightGrey = Color(0xFFF4F8FF);
   static const Color deepLightGrey = Color(0xFFA9B2B9);
+
 }
