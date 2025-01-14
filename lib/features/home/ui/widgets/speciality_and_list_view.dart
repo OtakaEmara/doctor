@@ -4,8 +4,11 @@ import 'package:doctor/core/theming/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../data/models/home_response.dart';
+
 class SpecialityAndListView extends StatelessWidget {
-  const SpecialityAndListView({super.key});
+  final List<Data> specialityData;
+  const SpecialityAndListView({super.key, required this.specialityData});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class SpecialityAndListView extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: specialityData.length,
               itemBuilder: (context, index) {
                 return Column(
                   children: [
@@ -26,7 +29,7 @@ class SpecialityAndListView extends StatelessWidget {
                       child: Image.asset("assets/images/home_general_doctor.png",height: 30,),
                     ),
                     vertical(10),
-                    Text('General',style: TextStyles.font12black400weight,)
+                    Text(specialityData[index].name,style: TextStyles.font12black400weight,)
                   ],
                 );
               },

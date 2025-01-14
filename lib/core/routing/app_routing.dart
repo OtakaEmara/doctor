@@ -1,5 +1,6 @@
 import 'package:doctor/core/di/dependancy_injection.dart';
 import 'package:doctor/core/routing/routers.dart';
+import 'package:doctor/features/home/logic/cubit/home_cubit.dart';
 import 'package:doctor/features/home/ui/home_screen.dart';
 import 'package:doctor/features/login/logic/cubit/login_cubit.dart';
 import 'package:doctor/features/onboarding/onboarding_screen.dart';
@@ -11,7 +12,7 @@ import '../../features/login/ui/login_screen.dart';
 
 class AppRouting{
 
-  static Route generateRouters(RouteSettings setting){
+  static Route? generateRouters(RouteSettings setting){
 
     switch(setting.name){
       case Routers.onBoarding:
@@ -30,13 +31,13 @@ class AppRouting{
         ));
 
       case Routers.home:
-        return MaterialPageRoute(builder: (_) => const HomeScreen(),);
+        return MaterialPageRoute(builder: (_) => BlocProvider(
+          create: (context) => HomeCubit(getIt())..emitHomeState(),
+          child: HomeScreen(),
+        ));
 
       default:
-        return MaterialPageRoute(builder: (_) {
-          return Container();
-          },
-        );
+        return null;
     }
   }
 

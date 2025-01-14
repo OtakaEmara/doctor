@@ -1,17 +1,19 @@
 import 'package:doctor/core/helpers/spacing.dart';
+import 'package:doctor/features/home/data/models/home_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/styles.dart';
 
 class DoctorListView extends StatelessWidget {
-  const DoctorListView({super.key});
+  final List<Doctors> doctorListData;
+  const DoctorListView({super.key, required this.doctorListData});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.separated(
-        itemCount: 10,
+        itemCount: doctorListData.length,
         itemBuilder: (context, index) {
           return Row(
             children: [
@@ -20,7 +22,7 @@ class DoctorListView extends StatelessWidget {
                 width: 120.w,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/home_doctor_list.png")
+                    image: AssetImage(doctorListData[index].photo)
                   )
                 ),
               ),
@@ -28,9 +30,9 @@ class DoctorListView extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Dr. Randy Wigham",style: TextStyles.font16black700weight,),
+                  Text(doctorListData[index].name,style: TextStyles.font16black700weight,),
                   vertical(10),
-                  Text('General | RSUD Gatot Subroto',style: TextStyles.font12grey500weight,)
+                  Text(doctorListData[index].email,style: TextStyles.font12grey500weight,)
                 ],
               )
             ],

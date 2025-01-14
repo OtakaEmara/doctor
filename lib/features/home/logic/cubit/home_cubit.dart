@@ -1,4 +1,3 @@
-import 'package:doctor/features/home/data/models/home_response.dart';
 import 'package:doctor/features/home/logic/cubit/home_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,15 +8,16 @@ class HomeCubit extends Cubit<HomeState>{
   HomeCubit(this._homeRepo) : super(const HomeState.initial());
 
   void emitHomeState() async{
-    emit(const HomeState.specializationsLoading());
+    emit(const HomeState.homeLoading());
+
     final response = await _homeRepo.homeDataRepo();
 
     response.when(
-      success: (data) {
-
+      success: (homeResponse) {
+        emit(HomeState.homeSuccess(homeResponse));
       },
       failure: (apiErrorModel) {
-
+        emit(HomeState.homeError(apiErrorModel));
       },
     );
   }
